@@ -1,14 +1,14 @@
-package com.thobho.quadility.dataengine
+package com.thobho.quadility.dataengine.configuration
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.thobho.quadility.Measurement
 import org.apache.activemq.ActiveMQConnectionFactory
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Primary
+import org.springframework.data.mongodb.core.ReactiveMongoTemplate
 import org.springframework.jms.annotation.EnableJms
 import org.springframework.jms.connection.CachingConnectionFactory
 import org.springframework.jms.support.converter.MappingJackson2MessageConverter
+import org.springframework.jms.support.converter.MessageConverter
 import org.springframework.jms.support.converter.MessageType
 
 
@@ -30,12 +30,10 @@ open class Configuration {
     }
 
     @Bean
-    open fun messageConverter(): MappingJackson2MessageConverter{
-        val objectMapper = ObjectMapper()
+    open fun messageConverter(): MessageConverter {
         val mapper = MappingJackson2MessageConverter()
         mapper.setTargetType(MessageType.TEXT)
         mapper.setTypeIdPropertyName("Measurement")
-        mapper.setTypeIdMappings(mapOf("test" to Measurement::class.java))
         return mapper
     }
 }

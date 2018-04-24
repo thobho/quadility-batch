@@ -41,6 +41,10 @@ repositories {
 
 
 dependencies {
+	// https://mvnrepository.com/artifact/com.github.wendykierp/JTransforms
+	compile group: 'com.github.wendykierp', name: 'JTransforms', version: '3.0'
+
+	compile('org.springframework.boot:spring-boot-starter-data-mongodb-reactive')
 	compile('org.springframework.boot:spring-boot-starter-activemq')
 	compile('org.springframework.boot:spring-boot-starter-webflux')
 	compile group: 'org.mongodb', name: 'mongodb-driver-reactivestreams', version: '1.6.0'

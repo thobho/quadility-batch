@@ -1,19 +1,20 @@
-package com.thobho.quadility.dataengine
+package com.thobho.quadility.dataengine.jms
 
-import com.thobho.quadility.Measurement
+import com.thobho.quadility.dataengine.service.MeasurementService
+import com.thobho.quadility.commons.business.Measurement
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.jms.annotation.JmsListener
-import org.springframework.jms.support.converter.MappingJackson2MessageConverter
 import org.springframework.stereotype.Component
-import javax.jms.Message
-import javax.jms.MessageListener
 
 @Component
 class MessageReceiver() {
 
+    @Autowired
+    lateinit var measurementService: MeasurementService
+
     @JmsListener(destination = "quadility_message")
     fun onMessage(measurement: Measurement) {
-        print("recived!")
+        measurementService.handleMeasurement(measurement)
     }
 }
 
